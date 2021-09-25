@@ -1,14 +1,10 @@
 FROM tomcat:latest
 RUN apt update
 RUN apt install git maven -y
-RUN mkdir /tmp/git
-RUN cd /tmp/git
-RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-RUN cd boxfuse-sample-java-war-hello
-RUN mvn package -q
+RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git /tmp/hello
+RUN mvn -q -f /tmp/hello package
 RUN tomcat_dir=`find /var/lib -maxdepth 1 -name "tomcat*" -type d`
-RUN mv ./target/hello-1.0.war $tomcat_dir/webapps/
-RUN cd /tmp
-RUN rm -r git
+RUN mv /tmp/hello/target/hello-1.0.war $tomcat_dir/webapps/
+RUN rm -r /tmp/hello
 RUN apt purge git maven -y
 RUN apt autoremove -y
