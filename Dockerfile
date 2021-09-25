@@ -3,7 +3,7 @@ RUN apt update
 RUN apt install git maven -y
 RUN mkdir /tmp/git
 RUN cd /tmp/git
-RUN git pull https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
 RUN cd boxfuse-sample-java-war-hello
 RUN mvn package -q
 RUN tomcat_dir=`find /var/lib -maxdepth 1 -name "tomcat*" -type d`
