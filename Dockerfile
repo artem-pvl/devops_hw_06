@@ -10,4 +10,4 @@ RUN rm -r /tmp/hello
 RUN apt purge git maven default-jdk -y
 RUN apt autoremove -y
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
+CMD ["/usr/share/tomcat9/bin/catalina.sh", "run"]
